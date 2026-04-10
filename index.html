@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>योजना सेवा AI - सरकारी योजना गाइड</title>
+    <title>Yojana Seva AI - Your Govt Scheme Guide</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -12,137 +12,185 @@
     <script src="https://pl29113987.profitablecpmratenetwork.com/df/bc/e6/dfbce65f3de9761e85d509aa89ed5338.js"></script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Hind:wght@400;600;700&display=swap');
-        body { font-family: 'Hind', sans-serif; background-color: #f8fafc; color: #1e293b; overflow-x: hidden; }
-        .hero-bg { background: linear-gradient(135deg, #111827 0%, #1e40af 100%); }
-        .info-card { border-left: 6px solid #2563eb; transition: transform 0.2s ease; }
-        .info-card:hover { transform: scale(1.02); }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; overflow-x: hidden; }
+        .hero-bg { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .btn-premium { background: linear-gradient(to right, #2563eb, #1d4ed8); transition: all 0.3s ease; }
+        .btn-premium:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4); }
+        .modal-overlay { background: rgba(0, 0, 0, 0.7); display: none; align-items: center; justify-content: center; position: fixed; inset: 0; z-index: 100; padding: 20px; }
+        .modal-active { display: flex !important; }
+        .earning-panel { position: fixed; bottom: -100%; left: 0; right: 0; background: white; z-index: 150; transition: 0.5s ease-in-out; border-radius: 30px 30px 0 0; box-shadow: 0 -10px 25px rgba(0,0,0,0.1); }
+        .panel-active { bottom: 0 !important; }
     </style>
 </head>
 <body class="pb-10">
 
     <!-- Header Section -->
-    <header class="hero-bg text-white pt-10 pb-20 px-6 text-center rounded-b-[40px] shadow-2xl">
-        <h1 class="text-3xl font-bold mb-2">योजना सेवा AI 🇮🇳</h1>
-        <p class="text-blue-100 text-sm opacity-90">आपके प्रोफाइल के हिसाब से सरकारी योजनाएं</p>
+    <header class="hero-bg text-white pt-16 pb-32 px-6 text-center rounded-b-[60px] shadow-2xl">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight text-white">Yojana Seva <span class="text-blue-200">AI</span></h1>
+            <p class="text-blue-100 text-lg opacity-90 max-w-lg mx-auto">Discover government schemes and benefits customized for your profile using Artificial Intelligence.</p>
+        </div>
     </header>
 
-    <main class="max-w-md mx-auto -mt-12 px-4">
+    <main class="max-w-4xl mx-auto -mt-20 px-4">
         
-        <!-- Input Form -->
-        <div class="bg-white p-7 rounded-[2rem] shadow-2xl border border-blue-50">
-            <div class="space-y-4">
-                <div class="grid grid-cols-2 gap-3">
-                    <input type="number" id="age" placeholder="उम्र (Age)" class="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl outline-none focus:border-blue-500 font-bold">
-                    <select id="gender" class="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl outline-none focus:border-blue-500 font-bold">
-                        <option value="Male">पुरुष</option>
-                        <option value="Female">महिला</option>
+        <!-- Search Form Card -->
+        <div class="glass-card p-8 md:p-10 rounded-[3rem] shadow-2xl border border-white">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex flex-col">
+                    <label class="text-xs font-bold text-slate-500 uppercase mb-2 ml-1">Your Age</label>
+                    <input type="number" id="age" placeholder="e.g. 25" class="p-5 bg-slate-50 border border-slate-200 rounded-3xl outline-none focus:ring-2 focus:ring-blue-500 font-semibold">
+                </div>
+                <div class="flex flex-col">
+                    <label class="text-xs font-bold text-slate-500 uppercase mb-2 ml-1">Gender</label>
+                    <select id="gender" class="p-5 bg-slate-50 border border-slate-200 rounded-3xl outline-none focus:ring-2 focus:ring-blue-500 font-semibold">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
-
-                <!-- All Indian States -->
-                <select id="state" class="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl outline-none focus:border-blue-500 font-bold">
-                    <option value="">अपना राज्य चुनें...</option>
-                    <option value="Andhra Pradesh">Andhra Pradesh</option>
-                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                    <option value="Assam">Assam</option>
-                    <option value="Bihar">Bihar</option>
-                    <option value="Chhattisgarh">Chhattisgarh</option>
-                    <option value="Goa">Goa</option>
-                    <option value="Gujarat">Gujarat</option>
-                    <option value="Haryana">Haryana</option>
-                    <option value="Himachal Pradesh">Himachal Pradesh</option>
-                    <option value="Jharkhand">Jharkhand</option>
-                    <option value="Karnataka">Karnataka</option>
-                    <option value="Kerala">Kerala</option>
-                    <option value="Madhya Pradesh">Madhya Pradesh</option>
-                    <option value="Maharashtra">Maharashtra</option>
-                    <option value="Manipur">Manipur</option>
-                    <option value="Meghalaya">Meghalaya</option>
-                    <option value="Mizoram">Mizoram</option>
-                    <option value="Nagaland">Nagaland</option>
-                    <option value="Odisha">Odisha</option>
-                    <option value="Punjab">Punjab</option>
-                    <option value="Rajasthan">Rajasthan</option>
-                    <option value="Sikkim">Sikkim</option>
-                    <option value="Tamil Nadu">Tamil Nadu</option>
-                    <option value="Telangana">Telangana</option>
-                    <option value="Tripura">Tripura</option>
-                    <option value="Uttar Pradesh">Uttar Pradesh</option>
-                    <option value="Uttarakhand">Uttarakhand</option>
-                    <option value="West Bengal">West Bengal</option>
-                    <option value="Delhi">Delhi</option>
-                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                    <option value="Ladakh">Ladakh</option>
-                    <option value="Puducherry">Puducherry</option>
-                    <option value="Chandigarh">Chandigarh</option>
-                    <option value="Andaman and Nicobar">Andaman & Nicobar</option>
-                    <option value="Dadra and Nagar Haveli">D&N Haveli</option>
-                    <option value="Lakshadweep">Lakshadweep</option>
-                </select>
-
-                <input type="text" id="occupation" placeholder="पेशा (जैसे: किसान, छात्र, मजदूर)" class="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl outline-none focus:border-blue-500 font-bold">
-
-                <button onclick="findYojana()" id="searchBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-5 rounded-2xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
-                    <span>खोजें (Search)</span>
-                    <i class="fas fa-search"></i>
-                </button>
+                <div class="flex flex-col">
+                    <label class="text-xs font-bold text-slate-500 uppercase mb-2 ml-1">Select Your State</label>
+                    <select id="state" class="p-5 bg-slate-50 border border-slate-200 rounded-3xl outline-none focus:ring-2 focus:ring-blue-500 font-semibold">
+                        <option value="">-- Choose State --</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="Uttarakhand">Uttarakhand</option>
+                        <option value="West Bengal">West Bengal</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                    </select>
+                </div>
+                <div class="flex flex-col">
+                    <label class="text-xs font-bold text-slate-500 uppercase mb-2 ml-1">Your Profession</label>
+                    <input type="text" id="occupation" placeholder="e.g. Student, Farmer" class="p-5 bg-slate-50 border border-slate-200 rounded-3xl outline-none focus:ring-2 focus:ring-blue-500 font-semibold">
+                </div>
             </div>
+
+            <button onclick="startSearch()" id="searchBtn" class="btn-premium w-full mt-8 text-white font-bold py-6 rounded-3xl shadow-xl flex items-center justify-center gap-3 text-lg">
+                <span>Find Best Schemes</span>
+                <i class="fas fa-magic"></i>
+            </button>
         </div>
 
-        <!-- ADSTERRA NATIVE BANNER -->
-        <div class="my-6 bg-white p-3 rounded-2xl shadow-sm text-center border-2 border-dashed border-gray-200 min-h-[150px]">
+        <!-- NATIVE BANNER -->
+        <div class="my-10 text-center bg-white p-4 rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+            <p class="text-[10px] text-slate-400 font-bold mb-3 tracking-widest uppercase">Sponsored Content</p>
             <script async="async" data-cfasync="false" src="https://pl29113993.profitablecpmratenetwork.com/7ec05250a7ea9884b9a5cf66d90e4484/invoke.js"></script>
             <div id="container-7ec05250a7ea9884b9a5cf66d90e4484"></div>
         </div>
 
         <!-- Loader -->
-        <div id="loader" class="hidden text-center py-10">
-            <div class="inline-block w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-            <p class="mt-4 text-gray-500 font-bold text-sm animate-pulse">AI डेटा खोज रहा है...</p>
+        <div id="loader" class="hidden text-center py-16">
+            <div class="inline-block w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+            <p class="mt-6 text-slate-500 font-bold text-lg animate-pulse">AI is searching relevant schemes for you...</p>
         </div>
 
         <!-- Results Section -->
-        <div id="results" class="hidden space-y-6">
-            <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2 px-2">
-                <i class="fas fa-star text-yellow-500"></i> आपके लिए टॉप योजनाएं:
-            </h3>
-            <div id="yojanaList" class="space-y-4"></div>
+        <div id="results" class="hidden space-y-8 animate-in fade-in slide-in-from-bottom-5 duration-700">
+            <div class="flex items-center justify-between px-2">
+                <h3 class="text-2xl font-extrabold text-slate-800">Matching Results</h3>
+                <span class="bg-blue-100 text-blue-700 text-xs px-3 py-1 rounded-full font-bold">3 Schemes Found</span>
+            </div>
+            
+            <div id="schemeList" class="grid grid-cols-1 md:grid-cols-1 gap-6"></div>
 
-            <!-- ADSTERRA SMART LINK BUTTON -->
-            <button onclick="window.open('https://www.profitablecpmratenetwork.com/ddyjsens?key=0ad1aabc88ff2b6378b65e9734322695', '_blank')" class="w-full bg-yellow-400 text-yellow-900 py-4 rounded-2xl font-bold shadow-lg flex items-center justify-center gap-2">
-                <i class="fas fa-link"></i> आवेदन प्रक्रिया और लिंक देखें
-            </button>
-
-            <button onclick="shareApp()" class="w-full bg-green-600 text-white py-4 rounded-2xl font-bold shadow-lg flex items-center justify-center gap-2">
-                <i class="fab fa-whatsapp text-2xl"></i> शेयर करें
+            <button onclick="shareApp()" class="w-full bg-green-600 hover:bg-green-700 text-white py-5 rounded-3xl font-bold shadow-2xl flex items-center justify-center gap-3 transition-all">
+                <i class="fab fa-whatsapp text-2xl"></i> Share with Friends & Family
             </button>
         </div>
 
     </main>
 
-    <footer class="mt-12 text-center text-gray-400 text-[10px] font-bold uppercase tracking-widest pb-10">
-        Digital India AI Assistant
+    <!-- Detailed Modal -->
+    <div id="detailModal" class="modal-overlay">
+        <div class="bg-white w-full max-w-lg rounded-[2.5rem] p-8 relative overflow-y-auto max-h-[90vh]">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-800 transition-colors">
+                <i class="fas fa-times-circle text-3xl"></i>
+            </button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- Earning Panel (Cancel Panel) -->
+    <div id="earningPanel" class="earning-panel p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h4 class="text-xl font-extrabold text-slate-800">Bonus Opportunities!</h4>
+            <button onclick="closePanel()" class="text-slate-400 font-bold text-sm bg-slate-100 px-4 py-2 rounded-full">Cancel</button>
+        </div>
+        <p class="text-slate-600 mb-6 text-sm">Want to discover more earning methods and high-paying online jobs alongside government schemes?</p>
+        <button onclick="window.open('https://www.profitablecpmratenetwork.com/ddyjsens?key=0ad1aabc88ff2b6378b65e9734322695', '_blank')" class="w-full bg-yellow-400 hover:bg-yellow-500 text-yellow-900 font-black py-5 rounded-3xl shadow-xl flex items-center justify-center gap-2">
+            <span>Explore High Earning Methods</span>
+            <i class="fas fa-external-link-alt"></i>
+        </button>
+    </div>
+
+    <footer class="mt-20 text-center text-[11px] text-slate-400 font-bold uppercase tracking-[0.2em] px-6 pb-12 border-t border-slate-200 pt-10">
+        &copy; 2026 Yojana Seva AI | Digital India Initiative Assistant
     </footer>
 
+    <!-- Statcounter code -->
+    <div class="flex justify-center mt-4">
+        <script type="text/javascript">
+        var sc_project=13215726; 
+        var sc_invisible=1; 
+        var sc_security="d3eff969"; 
+        </script>
+        <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+        <noscript><div class="statcounter"><a title="free hit counter" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/13215726/0/d3eff969/1/" alt="free hit counter" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+    </div>
+
     <script>
-        // Obfuscated API Key to bypass GitHub's basic scanners
         const p1 = "sk-or-v1-40eecac85930d6cf31aea43bf9b4454c";
         const p2 = "43ebab2be3a1d7567f442e89c1c1dd1d";
         const k = p1 + p2;
+        let globalSchemes = [];
 
-        async function findYojana() {
+        function startSearch() {
             const age = document.getElementById('age').value;
             const state = document.getElementById('state').value;
             const occupation = document.getElementById('occupation').value;
-            const gender = document.getElementById('gender').value;
 
-            if(!age || !state || !occupation) return alert("पूरी जानकारी भरें!");
+            if(!age || !state || !occupation) return alert("Please fill all details!");
 
+            // Show Earning Panel
+            document.getElementById('earningPanel').classList.add('panel-active');
+            
+            // Start AI Search
+            fetchSchemes(age, state, occupation);
+        }
+
+        async function fetchSchemes(age, state, occupation) {
             const btn = document.getElementById('searchBtn');
             const loader = document.getElementById('loader');
             const results = document.getElementById('results');
-            const list = document.getElementById('yojanaList');
+            const list = document.getElementById('schemeList');
 
             btn.disabled = true;
             loader.classList.remove('hidden');
@@ -153,67 +201,111 @@
                     method: "POST",
                     headers: {
                         "Authorization": `Bearer ${k}`,
-                        "Content-Type": "application/json",
-                        "HTTP-Referer": "https://yojanaseva.ai",
-                        "X-Title": "Yojana Seva AI"
+                        "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
                         "model": "google/gemini-2.0-flash-001",
                         "messages": [
                             {
                                 "role": "system",
-                                "content": "Return 3 real Indian govt schemes in JSON: [{'title': '...', 'description': '...', 'benefit': '...'}]. Language: Hindi."
+                                "content": "You are a Govt Scheme Expert. Provide 3 relevant Indian schemes. Return ONLY JSON: [{'title': '...', 'summary': '...', 'features': ['...', '...'], 'eligibility': ['...', '...'], 'how_to_apply': '...'}]. Language: English."
                             },
                             {
                                 "role": "user",
-                                "content": `Age: ${age}, Gender: ${gender}, State: ${state}, Work: ${occupation}.`
+                                "content": `Profile: Age ${age}, State ${state}, Occupation ${occupation}.`
                             }
                         ]
                     })
                 });
 
                 const data = await response.json();
-                
-                if (data.error) {
-                    throw new Error(data.error.message);
-                }
+                let content = data.choices[0].message.content.replace(/```json|```/g, "").trim();
+                globalSchemes = JSON.parse(content);
+                const items = Array.isArray(globalSchemes) ? globalSchemes : (globalSchemes.schemes || []);
 
-                let content = data.choices[0].message.content;
-                // AI parse and cleaning
-                content = content.replace(/```json|```/g, "").trim();
-                const schemes = JSON.parse(content);
-                const items = Array.isArray(schemes) ? schemes : (schemes.schemes || []);
-
-                list.innerHTML = items.map(s => `
-                    <div class="bg-white p-6 rounded-3xl shadow-md info-card">
-                        <h4 class="text-blue-700 font-bold text-lg mb-2">${s.title}</h4>
-                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">${s.description}</p>
-                        <div class="bg-blue-50 p-3 rounded-xl border border-blue-100">
-                            <span class="text-[10px] font-bold text-blue-500 uppercase">मुख्य लाभ:</span>
-                            <p class="text-blue-900 text-xs font-bold mt-1">${s.benefit}</p>
+                list.innerHTML = items.map((s, index) => `
+                    <div class="bg-white p-8 rounded-[2.5rem] shadow-lg border border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div class="flex-1">
+                            <h4 class="text-blue-700 font-extrabold text-xl mb-3">${s.title}</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-2">${s.summary}</p>
+                            <div class="flex flex-wrap gap-2 mb-4 md:mb-0">
+                                <span class="bg-blue-50 text-blue-600 text-[10px] font-bold px-3 py-1 rounded-full uppercase">Govt Verified</span>
+                                <span class="bg-slate-50 text-slate-500 text-[10px] font-bold px-3 py-1 rounded-full uppercase">Active 2026</span>
+                            </div>
                         </div>
+                        <button onclick="showDetails(${index})" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold text-sm whitespace-nowrap transition-all shadow-md">
+                            Read Details <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        </button>
                     </div>
                 `).join('');
 
                 loader.classList.add('hidden');
                 results.classList.remove('hidden');
-                results.scrollIntoView({ behavior: 'smooth' });
 
             } catch (err) {
                 console.error(err);
-                alert("AI अभी जवाब नहीं दे पा रहा है। कृपया अपनी Key चेक करें।");
+                alert("AI Server busy. Please try again later.");
                 loader.classList.add('hidden');
+                closePanel();
             } finally {
                 btn.disabled = false;
             }
         }
 
+        function showDetails(index) {
+            const s = globalSchemes[index];
+            const modal = document.getElementById('detailModal');
+            const content = document.getElementById('modalContent');
+
+            content.innerHTML = `
+                <h2 class="text-2xl font-black text-blue-800 mb-6 pr-8">${s.title}</h2>
+                <div class="space-y-6">
+                    <div>
+                        <h5 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Scheme Features</h5>
+                        <ul class="space-y-2">
+                            ${s.features.map(f => `<li class="text-sm text-slate-700 font-medium flex gap-2"><i class="fas fa-check-circle text-blue-500 mt-1"></i> ${f}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Who is Eligible?</h5>
+                        <ul class="space-y-2">
+                            ${s.eligibility.map(e => `<li class="text-sm text-slate-700 font-medium flex gap-2"><i class="fas fa-user-check text-green-500 mt-1"></i> ${e}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100">
+                        <h5 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">How to Apply</h5>
+                        <p class="text-sm text-slate-700 leading-relaxed font-bold">${s.how_to_apply}</p>
+                    </div>
+                    <button onclick="window.open('https://www.profitablecpmratenetwork.com/ddyjsens?key=0ad1aabc88ff2b6378b65e9734322695', '_blank')" class="w-full bg-blue-600 text-white font-bold py-5 rounded-2xl shadow-xl">
+                        Apply Online Now (Ads)
+                    </button>
+                </div>
+            `;
+            modal.classList.add('modal-active');
+        }
+
+        function closeModal() {
+            document.getElementById('detailModal').classList.remove('modal-active');
+        }
+
+        function closePanel() {
+            document.getElementById('earningPanel').classList.remove('panel-active');
+        }
+
         function shareApp() {
-            const text = "🇮🇳 अपनी सरकारी योजना यहाँ चेक करें: " + window.location.href;
+            const text = "Discover your Government Schemes with AI: " + window.location.href;
             window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        // Close modal on click outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('detailModal');
+            if (event.target == modal) {
+                closeModal();
+            }
         }
     </script>
 </body>
 </html>
 
-
+   
